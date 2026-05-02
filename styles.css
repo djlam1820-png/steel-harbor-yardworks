@@ -483,6 +483,12 @@ h3 {
   gap: var(--space-4);
 }
 
+.faq-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-4);
+}
+
 .card,
 .package {
   position: relative;
@@ -958,6 +964,7 @@ fieldset {
   }
 
   .service-grid,
+  .faq-grid,
   .packages,
   .steps,
   .proof-bar {
@@ -988,6 +995,7 @@ fieldset {
 
   .hero-proof,
   .service-grid,
+  .faq-grid,
   .packages,
   .steps,
   .proof-bar,
