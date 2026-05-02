@@ -39,19 +39,20 @@
   const quoteForm = document.querySelector("[data-quote-form]");
   const success = document.querySelector("[data-form-success]");
   const error = document.querySelector("[data-form-error]");
-  quoteForm?.addEventListener("submit", async (event) => {
-    event.preventDefault();
+  const formTarget = document.querySelector('iframe[name="google-form-target"]');
+  let formSubmitted = false;
+  let formTimer = null;
+
+  quoteForm?.addEventListener("submit", () => {
     if (!quoteForm.checkValidity()) {
       quoteForm.reportValidity();
       return;
     }
 
-    const data = new FormData(quoteForm);
-    data.set("_subject", `Price My Cut request - ${data.get("address") || "new yard"}`);
     const submitButton = quoteForm.querySelector('button[type="submit"]');
-    const endpoint = quoteForm.dataset.endpoint || quoteForm.action;
-    const originalText = submitButton?.textContent;
+    quoteForm.dataset.buttonText = submitButton?.textContent || "Price My Cut";
 
+    formSubmitted = true;
     success?.classList.remove("is-visible");
     error?.classList.remove("is-visible");
     if (submitButton) {
@@ -59,28 +60,37 @@
       submitButton.textContent = "Sending...";
     }
 
-    try {
-      const response = await fetch(endpoint, {
-        method: "POST",
-        headers: { Accept: "application/json" },
-        body: data
-      });
-
-      if (!response.ok) {
-        throw new Error("Form submission failed");
+    clearTimeout(formTimer);
+    formTimer = setTimeout(() => {
+      if (!formSubmitted) return;
+      formSubmitted = false;
+      if (submitButton) {
+        submitButton.disabled = false;
+        submitButton.textContent = quoteForm.dataset.buttonText || "Price My Cut";
       }
+      error?.classList.add("is-visible");
+      error?.scrollIntoView({ behavior: "smooth", block: "center" });
+    }, 8000);
+  });
 
+  formTarget?.addEventListener("load", () => {
+    if (!formSubmitted) return;
+    formSubmitted = false;
+    clearTimeout(formTimer);
+
+    const submitButton = quoteForm?.querySelector('button[type="submit"]');
+    if (submitButton) {
+      submitButton.disabled = false;
+      submitButton.textContent = quoteForm?.dataset.buttonText || "Price My Cut";
+    }
+
+    try {
       quoteForm.reset();
       success?.classList.add("is-visible");
       success?.scrollIntoView({ behavior: "smooth", block: "center" });
     } catch (submissionError) {
       error?.classList.add("is-visible");
       error?.scrollIntoView({ behavior: "smooth", block: "center" });
-    } finally {
-      if (submitButton) {
-        submitButton.disabled = false;
-        submitButton.textContent = originalText || "Price My Cut";
-      }
     }
   });
 })();
