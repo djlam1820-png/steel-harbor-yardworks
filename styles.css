@@ -188,6 +188,16 @@ h3 {
   text-transform: uppercase;
 }
 
+.brand-logo {
+  width: clamp(170px, 18vw, 230px);
+  height: auto;
+  border-radius: 0;
+}
+
+.footer-logo {
+  width: clamp(190px, 22vw, 275px);
+}
+
 .brand svg {
   width: 46px;
   color: var(--color-accent);

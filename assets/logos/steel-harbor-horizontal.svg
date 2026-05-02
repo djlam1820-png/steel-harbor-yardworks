@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 360" font-family="'Barlow Condensed','Oswald','Arial Narrow',sans-serif">
+  <rect width="1100" height="360" fill="#11110f"/>
+  <g transform="translate(60 110)">
+    <rect x="0" y="0" width="160" height="18" fill="#f4eddf"/>
+    <rect x="0" y="36" width="160" height="18" fill="#f4eddf"/>
+    <rect x="0" y="72" width="160" height="18" fill="#f4eddf"/>
+    <rect x="0" y="108" width="160" height="18" fill="#f4eddf"/>
+    <path d="M-10 130 L180 -20" stroke="#ff7426" stroke-width="14" stroke-linecap="square"/>
+  </g>
+  <g transform="translate(260 0)">
+    <text x="0" y="170" font-size="120" font-weight="800" fill="#f4eddf" letter-spacing="2" style="text-transform:uppercase">STEEL HARBOR</text>
+    <line x1="2" y1="200" x2="60" y2="200" stroke="#ff7426" stroke-width="6"/>
+    <text x="74" y="212" font-size="34" font-weight="900" fill="#ff7426" letter-spacing="9" style="text-transform:uppercase">YARDWORKS</text>
+    <text x="2" y="262" font-size="22" font-weight="700" fill="#756f65" letter-spacing="6" style="text-transform:uppercase">CLEAN CUTS. LESS YARD TIME.</text>
+  </g>
+</svg>

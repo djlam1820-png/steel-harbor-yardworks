@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" font-family="'Barlow Condensed','Oswald','Arial Narrow',sans-serif">
+  <rect width="800" height="500" fill="#11110f"/>
+
+  <!-- Reusable mini "cut stripes" mark, centered on its origin -->
+  <defs>
+    <g id="cutMark">
+      <rect x="-15" y="-10" width="30" height="4" fill="#f4eddf"/>
+      <rect x="-15" y="-2"  width="30" height="4" fill="#f4eddf"/>
+      <rect x="-15" y="6"   width="30" height="4" fill="#f4eddf"/>
+      <line x1="-17" y1="13" x2="17" y2="-13" stroke="#ff7426" stroke-width="4" stroke-linecap="square"/>
+    </g>
+  </defs>
+
+  <!--
+    Layout (origin at translate y=90):
+      STEEL baseline      y =  90   (top of caps ≈ y=0)
+      HARBOR baseline     y = 220   (130px line height)
+      YARDWORKS baseline  y = 270   (50px below HARBOR)
+      Bottom rule         y = 320   (50px below YARDWORKS)
+    Frame: 90px top padding (translate=90) + bottom rule at y=320 → 410 absolute,
+           90px bottom padding → frame height 500. Symmetric.
+  -->
+  <g transform="translate(400 90)">
+    <text x="0" y="90"  font-size="120" font-weight="800" fill="#f4eddf" text-anchor="middle" letter-spacing="3" style="text-transform:uppercase">STEEL</text>
+    <text x="0" y="220" font-size="120" font-weight="800" fill="#ff7426" text-anchor="middle" letter-spacing="3" style="text-transform:uppercase">HARBOR</text>
+    <text x="0" y="270" font-size="40"  font-weight="900" fill="#b9b0a1" text-anchor="middle" letter-spacing="14" style="text-transform:uppercase">YARDWORKS</text>
+
+    <line x1="-220" y1="320" x2="-30" y2="320" stroke="#ff7426" stroke-width="5"/>
+    <line x1="30"   y1="320" x2="220"  y2="320" stroke="#ff7426" stroke-width="5"/>
+    <use href="#cutMark" x="0" y="320"/>
+  </g>
+</svg>
