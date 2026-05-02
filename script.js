@@ -1,21 +1,6 @@
 (function () {
   const root = document.documentElement;
-  const themeToggle = document.querySelector("[data-theme-toggle]");
-  let theme = window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
-  root.setAttribute("data-theme", theme);
-
-  function paintThemeButton() {
-    if (!themeToggle) return;
-    themeToggle.setAttribute("aria-label", `Switch to ${theme === "dark" ? "light" : "dark"} mode`);
-    themeToggle.textContent = theme === "dark" ? "☀" : "●";
-  }
-
-  paintThemeButton();
-  themeToggle?.addEventListener("click", () => {
-    theme = theme === "dark" ? "light" : "dark";
-    root.setAttribute("data-theme", theme);
-    paintThemeButton();
-  });
+  root.setAttribute("data-theme", "light");
 
   const menuToggle = document.querySelector("[data-menu-toggle]");
   const nav = document.querySelector("[data-nav]");

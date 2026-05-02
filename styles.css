@@ -243,7 +243,6 @@ h3 {
   gap: var(--space-3);
 }
 
-.theme-toggle,
 .menu-toggle {
   min-width: 44px;
   min-height: 44px;
