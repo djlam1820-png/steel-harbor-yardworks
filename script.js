@@ -38,7 +38,8 @@
 
   const quoteForm = document.querySelector("[data-quote-form]");
   const success = document.querySelector("[data-form-success]");
-  quoteForm?.addEventListener("submit", (event) => {
+  const error = document.querySelector("[data-form-error]");
+  quoteForm?.addEventListener("submit", async (event) => {
     event.preventDefault();
     if (!quoteForm.checkValidity()) {
       quoteForm.reportValidity();
@@ -46,25 +47,40 @@
     }
 
     const data = new FormData(quoteForm);
-    const recipient = quoteForm.dataset.recipient || "";
-    const subject = `Price My Cut request - ${data.get("address") || "new yard"}`;
-    const body = [
-      "Steel Harbor Yardworks quote request",
-      "",
-      `Name: ${data.get("name") || ""}`,
-      `Address: ${data.get("address") || ""}`,
-      `Phone: ${data.get("phone") || ""}`,
-      `Email: ${data.get("email") || ""}`,
-      `Service needed: ${data.get("service") || ""}`,
-      `Weekly or one-time: ${data.get("frequency") || ""}`,
-      `Preferred contact: ${data.get("contact") || ""}`,
-      "",
-      "Notes:",
-      data.get("notes") || "None provided"
-    ].join("\n");
+    data.set("_subject", `Price My Cut request - ${data.get("address") || "new yard"}`);
+    const submitButton = quoteForm.querySelector('button[type="submit"]');
+    const endpoint = quoteForm.dataset.endpoint || quoteForm.action;
+    const originalText = submitButton?.textContent;
 
-    window.location.href = `mailto:${encodeURIComponent(recipient)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    success?.classList.add("is-visible");
-    success?.scrollIntoView({ behavior: "smooth", block: "center" });
+    success?.classList.remove("is-visible");
+    error?.classList.remove("is-visible");
+    if (submitButton) {
+      submitButton.disabled = true;
+      submitButton.textContent = "Sending...";
+    }
+
+    try {
+      const response = await fetch(endpoint, {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: data
+      });
+
+      if (!response.ok) {
+        throw new Error("Form submission failed");
+      }
+
+      quoteForm.reset();
+      success?.classList.add("is-visible");
+      success?.scrollIntoView({ behavior: "smooth", block: "center" });
+    } catch (submissionError) {
+      error?.classList.add("is-visible");
+      error?.scrollIntoView({ behavior: "smooth", block: "center" });
+    } finally {
+      if (submitButton) {
+        submitButton.disabled = false;
+        submitButton.textContent = originalText || "Price My Cut";
+      }
+    }
   });
 })();

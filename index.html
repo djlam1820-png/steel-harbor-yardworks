@@ -187,8 +187,13 @@
             <div class="proof-tile" style="margin-top: var(--space-6)"><strong>Route fit first</strong><span>The quote starts with the address and the service needed.</span></div>
           </div>
           <div class="quote-panel">
-            <div class="form-success" data-form-success role="status">Your email app should open with the request filled in. If it does not, send the same details to the Steel Harbor contact email.</div>
-            <form class="quote-form" data-quote-form data-recipient="djlam1820@gmail.com">
+            <div class="form-success" data-form-success role="status">Request sent. Steel Harbor will review the route fit and follow up.</div>
+            <div class="form-success form-error" data-form-error role="alert">Something blocked the request. Please try again or contact Steel Harbor directly.</div>
+            <form class="quote-form" data-quote-form action="https://formsubmit.co/djlam1820@gmail.com" method="POST" data-endpoint="https://formsubmit.co/ajax/djlam1820@gmail.com">
+              <input type="hidden" name="_subject" value="Price My Cut request - Steel Harbor Yardworks" />
+              <input type="hidden" name="_template" value="table" />
+              <input type="hidden" name="_captcha" value="false" />
+              <input type="text" name="_honey" tabindex="-1" autocomplete="off" class="honeypot" aria-hidden="true" />
               <div class="form-grid">
                 <div class="field"><label for="name">Name</label><input id="name" name="name" autocomplete="name" required /></div>
                 <div class="field"><label for="phone">Phone</label><input id="phone" name="phone" autocomplete="tel" required /></div>

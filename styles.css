@@ -876,8 +876,19 @@ fieldset {
   display: none;
 }
 
+.form-error {
+  background: color-mix(in oklab, var(--color-accent), var(--color-surface) 72%);
+}
+
 .form-success.is-visible {
   display: block;
+}
+
+.honeypot {
+  position: absolute;
+  left: -9999px;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .site-footer {
