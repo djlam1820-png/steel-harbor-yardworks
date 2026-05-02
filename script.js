@@ -24,12 +24,14 @@
     menuToggle.setAttribute("aria-expanded", open ? "true" : "false");
   });
 
-  document.querySelectorAll("[data-scroll-target]").forEach((trigger) => {
+  document.querySelectorAll('a[href^="#"]').forEach((trigger) => {
     trigger.addEventListener("click", (event) => {
-      const target = document.querySelector(trigger.getAttribute("data-scroll-target"));
+      const target = document.querySelector(trigger.getAttribute("href"));
       if (target) {
         event.preventDefault();
         target.scrollIntoView({ behavior: "smooth", block: "start" });
+        nav?.classList.remove("is-open");
+        menuToggle?.setAttribute("aria-expanded", "false");
       }
     });
   });
@@ -42,8 +44,29 @@
       quoteForm.reportValidity();
       return;
     }
+
+    const data = new FormData(quoteForm);
+    const selectedPhotos = quoteForm.querySelector("#photos")?.files?.length || 0;
+    const recipient = quoteForm.dataset.recipient || "";
+    const subject = `Price My Cut request - ${data.get("address") || "new yard"}`;
+    const body = [
+      "Steel Harbor Yardworks quote request",
+      "",
+      `Name: ${data.get("name") || ""}`,
+      `Address: ${data.get("address") || ""}`,
+      `Phone: ${data.get("phone") || ""}`,
+      `Email: ${data.get("email") || ""}`,
+      `Service needed: ${data.get("service") || ""}`,
+      `Weekly or one-time: ${data.get("frequency") || ""}`,
+      `Preferred contact: ${data.get("contact") || ""}`,
+      `Photos selected: ${selectedPhotos ? `${selectedPhotos} file(s) selected. Please attach them to this email before sending.` : "No"}`,
+      "",
+      "Notes:",
+      data.get("notes") || "None provided"
+    ].join("\n");
+
+    window.location.href = `mailto:${encodeURIComponent(recipient)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     success?.classList.add("is-visible");
-    quoteForm.reset();
     success?.scrollIntoView({ behavior: "smooth", block: "center" });
   });
 })();
