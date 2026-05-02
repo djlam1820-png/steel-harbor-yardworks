@@ -1,6 +1,6 @@
 (function () {
   const root = document.documentElement;
-  root.setAttribute("data-theme", "light");
+  root.setAttribute("data-theme", "dark");
 
   const menuToggle = document.querySelector("[data-menu-toggle]");
   const nav = document.querySelector("[data-nav]");
