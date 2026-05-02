@@ -46,7 +46,6 @@
     }
 
     const data = new FormData(quoteForm);
-    const selectedPhotos = quoteForm.querySelector("#photos")?.files?.length || 0;
     const recipient = quoteForm.dataset.recipient || "";
     const subject = `Price My Cut request - ${data.get("address") || "new yard"}`;
     const body = [
@@ -59,7 +58,6 @@
       `Service needed: ${data.get("service") || ""}`,
       `Weekly or one-time: ${data.get("frequency") || ""}`,
       `Preferred contact: ${data.get("contact") || ""}`,
-      `Photos selected: ${selectedPhotos ? `${selectedPhotos} file(s) selected. Please attach them to this email before sending.` : "No"}`,
       "",
       "Notes:",
       data.get("notes") || "None provided"
