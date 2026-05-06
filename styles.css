@@ -304,11 +304,17 @@ h3 {
 .btn-primary {
   background: var(--color-accent);
   color: #12120f;
-  box-shadow: 6px 6px 0 color-mix(in oklab, var(--color-text), transparent 84%);
+  box-shadow: 0 6px 18px color-mix(in oklab, var(--color-accent), transparent 70%);
 }
 
 .btn-primary:hover {
   background: var(--color-accent-hover);
+  box-shadow: 0 8px 22px color-mix(in oklab, var(--color-accent), transparent 60%);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 10px color-mix(in oklab, var(--color-accent), transparent 70%);
 }
 
 .btn-secondary {
